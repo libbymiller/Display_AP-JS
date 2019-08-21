@@ -13,7 +13,7 @@ https://learn.adafruit.com/adafruit-lis3dh-triple-axis-accelerometer-breakout/pi
 
 # Together
 
-<img src="wemos_LIS3DH.jpg"/>
+<img src="wemos_LIS3DH.jpg" width="300px"/>
 
 # Wemos with Arduino IDE instructions
 
