@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset = "utf-8" />
+                 <title>Counter </title>
+                 <meta name = "viewport" content = "width=device-width">
+                              <style>
+.container {
+  width: 450px;
+  margin: 0 auto;
+text - align: center;
+}
+
+.reading{
+ font-size:20px;
+ padding:10px;
+}
+</style>
+</head>
+
+<body>
+<div class = "container">
+X<span class="reading" id="x"></span>
+Y<span class="reading" id="y"></span>
+Z<span class="reading" id="z"></span>
+</div>                   
+
+<div class = "container">
+X accel<span class="reading" id="xacc"></span>
+Y accel<span class="reading" id="yacc"></span>
+Z accel<span class="reading" id="zacc"></span>
+</div>                   
+                                 
+<script type = "text/javascript">
+var Analog0 = new Array(); // create the arrays for the analog readings here.
+
+document.addEventListener("DOMContentLoaded", function(event) {
+  console.log("DOM fully loaded and parsed");
+
+});
+
+var connection = new WebSocket('ws://' + location.hostname + ':81/', ['arduino']);
+connection.onopen = function () {
+  connection.send('GET_TEMP');
+};
+console.log("connection opened");
+connection.onerror = function (error) {
+  console.log('WebSocket Error ', error);
+};
+
+connection.onmessage = function(evt)
+{
+  // handle websocket message. update attributes or values of elements that match the name on incoming message
+  console.log("msg rec", evt.data);
+  var msgArray = evt.data.split(","); // split message by delimiter into a string array
+  console.log("msgArray", msgArray[0]);
+  console.log("msgArray", msgArray[1]);
+  console.log("msgArray", msgArray[2]);
+  console.log("msgArray", msgArray[3]);
+  console.log("msgArray", msgArray[4]);
+  console.log("msgArray", msgArray[5]);
+  var x_val = msgArray[0].split("=")[1];
+  var y_val = msgArray[1].split("=")[1];
+  var z_val = msgArray[2].split("=")[1];
+  var x_accel_val = msgArray[3].split("=")[1];
+  var y_accel_val = msgArray[4].split("=")[1];
+  var z_accel_val = msgArray[5].split("=")[1];
+  document.getElementById("x").innerHTML = x_val;
+  document.getElementById("y").innerHTML = y_val;
+  document.getElementById("z").innerHTML = z_val;
+  document.getElementById("xacc").innerHTML = x_accel_val;
+  document.getElementById("yacc").innerHTML = y_accel_val;
+  document.getElementById("zacc").innerHTML = z_accel_val;
+  
+} // connection.onmessage
+;
+
+    </script>
+  </body>
+</html>
