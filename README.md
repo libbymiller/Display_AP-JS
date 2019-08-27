@@ -3,6 +3,12 @@
 Code by Ray Burnette, from https://www.hackster.io/rayburne/nodemcu-esp8266-remote-temperature-using-websockets-5956c4 - lightly edited to add in 
 accelerometer instead of temperature.
 
+Adapted to use a LIS3DH.
+
+On load it creates an AP - "Oramics" - connect to it to get a popup window to specify 
+the wifi network. Get the IP address from the serial.
+
+
 # Wemos D1 mini pinout
 
 https://escapequotes.net/esp8266-wemos-d1-mini-pins-and-diagram/
