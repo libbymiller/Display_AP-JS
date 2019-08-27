@@ -23,8 +23,12 @@ https://wiki.wemos.cc/tutorials:get_started:get_started_in_arduino
 
 I used this guide:
 
-https://randomnerdtutorials.com/esp32-web-server-spiffs-spi-flash-file-system/https://tttapa.github.io/ESP8266/Chap11%20-%20SPIFFS.html
+https://tttapa.github.io/ESP8266/Chap11%20-%20SPIFFS.html
 
-and then this because there was no 'ESP8266 data sketch upload' option in tools
+a bit more here:
+
+https://randomnerdtutorials.com/esp32-web-server-spiffs-spi-flash-file-system/
+
+and then this because there was no 'ESP8266 data sketch upload' option in tools:
 
 https://github.com/esp8266/Arduino/issues/5936#issuecomment-478449861
