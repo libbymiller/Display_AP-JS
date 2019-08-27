@@ -1,10 +1,22 @@
+
 /* Go to http:// 192.168.4.1 in a web browser
    connected to this access point to see it.
 */
 
+#include <ESP8266WiFi.h>
+#include <ESP8266WiFiMulti.h>
+#include <WiFiManager.h>
+//https://github.com/tzapu/WiFiManager
+
+//#include <ESPmDNS.h>
+// https://github.com/espressif/arduino-esp32/blob/master/libraries/ESPmDNS/src/ESPmDNS.h
+
 #include <ESP8266WebServer.h>
 #include <WebSocketsServer.h>
 
+#define NAME "Oramics"
+
+/*
 // Below variables are used for Steinhart-Hart and associated temperature calcs
 // Refer to // https://arduinodiy.wordpress.com/2015/11/10/measuring-temperature-with-ntc-the-steinhart-hart-formula/
 #define            SERIESRESISTOR  150000    //  Reduced current and scale to 0 - 1 Volts
@@ -17,12 +29,15 @@ float              steinhart     = 0.0;      //       ditto
 float              temperature   = 0.0;      //       ditto
 int                temp_int      = 0;        //       ditto
 int                correction    = 49;       // adjust readings to measured by accurate digital thermometer
+
 // Below variables are general global variables
-uint8_t            socketNumber;
 char               AP_NameChar[6];            // AP_NameString.length() + 1];
 const char         WiFiAPPSK[]   = "";        // "put your password here before compiling"
 String             AP_NameString = "Oramics";
 String             temp_str;
+*/
+
+uint8_t            socketNumber;
 
 
 ESP8266WebServer server(80);
@@ -112,6 +127,7 @@ bool handleFileRead(String path) {
 
 void setupWiFi()
 {
+/*
   WiFi.mode(WIFI_AP);
   // char AP_NameChar[AP_NameString.length() + 1];
   memset(AP_NameChar, 0, AP_NameString.length() + 1);
@@ -120,9 +136,41 @@ void setupWiFi()
     AP_NameChar[i] = AP_NameString.charAt(i);
   yield();
   WiFi.softAP(AP_NameChar, WiFiAPPSK);
+*/
+
+    WiFiManager wifiManager;
+
+    //reset settings - for testing
+    //wifiManager.resetSettings();
+
+    //sets timeout until configuration portal gets turned off
+    //useful to make it all retry or go to sleep
+    //in seconds
+    //wifiManager.setTimeout(120);
+
+    //it starts an access point with the specified name
+    //here  "Oramics"
+    //and goes into a blocking loop awaiting configuration
+
+    //WITHOUT THIS THE AP DOES NOT SEEM TO WORK PROPERLY WITH SDK 1.5 , update to at least 1.5.1
+    //WiFi.mode(WIFI_STA);
+    
+    if (!wifiManager.startConfigPortal(NAME)) {
+      Serial.println("failed to connect and hit timeout");
+      delay(3000);
+      //reset and try again, or maybe put it to deep sleep
+      ESP.reset();
+      delay(5000);
+    }
+
+    //if you get here you have connected to the WiFi
+    Serial.println("connected");
+    Serial.print("IP is ");
+    Serial.println(WiFi.localIP());
+
+    configTime(3 * 3600, 0, "pool.ntp.org", "time.nist.gov");
+
 }
-
-
 
 
  
