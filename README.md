@@ -32,3 +32,5 @@ https://randomnerdtutorials.com/esp32-web-server-spiffs-spi-flash-file-system/
 and then this because there was no 'ESP8266 data sketch upload' option in tools:
 
 https://github.com/esp8266/Arduino/issues/5936#issuecomment-478449861
+
+- put it in ~/Documents/Arduino/tools/ESP8266FS/tool/esp8266fs.jar  
