@@ -21,11 +21,11 @@ https://learn.adafruit.com/adafruit-lis3dh-triple-axis-accelerometer-breakout/pi
 
 using 12C - 
 
-wemos - LIS3DH
-3.3 - vin
-G - G
-D2 - sda
-D1 - scl
+    wemos - LIS3DH
+    3.3 - VIN
+    G - G
+    D2 - SDA
+    D1 - SCL
 
 <img src="wemos_LIS3DH.jpg" width="300px"/>
 
